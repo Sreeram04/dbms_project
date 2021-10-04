@@ -22,7 +22,7 @@ PRIMARY KEY(room_no),
 FOREIGN KEY(room_id) REFERENCES hotel(room_id));
 
 CREATE TABLE customer(
-sl_no INT NOT NULL,
+//sl_no INT NOT NULL,
 customer_id INT NOT NULL,
 first_name VARCHAR(30) NOT NULL,
 last_name VARCHAR(30) NOT NULL,
@@ -42,5 +42,5 @@ PRIMARY KEY(staff_id));
 CREATE TABLE password_hotel(
 password_staff INT NOT NULL,
 staff_id INT NOT NULL,
-FOREIGN KEY(staff_id) REFERENCES hotel(staff_id));
+FOREIGN KEY(staff_id) REFERENCES staff(staff_id));
 
