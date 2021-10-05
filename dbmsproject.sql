@@ -39,8 +39,8 @@ designation VARCHAR(30) NOT NULL,
 PRIMARY KEY(staff_id));
 
 CREATE TABLE password_hotel(
-password_staff INT NOT NULL,
 staff_id INT NOT NULL,
+password_staff VARCHAR(10) NOT NULL,
 FOREIGN KEY(staff_id) REFERENCES staff(staff_id));
 
 
