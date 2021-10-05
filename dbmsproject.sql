@@ -26,7 +26,7 @@ customer_id INT NOT NULL,
 first_name VARCHAR(30) NOT NULL,
 last_name VARCHAR(30) NOT NULL,
 room_no INT NOT NULL,
-phone INT NOT NULL,
+phone VARCHAR(10) NOT NULL,
 cust_status VARCHAR(30) NOT NULL,
 PRIMARY KEY(customer_id),
 FOREIGN KEY(room_no) REFERENCES room(room_no));
@@ -75,3 +75,16 @@ VALUES
   (10602,106,'Available'),
   (10603,106,'Occupied'),
   (10701,107,'Available');
+
+INSERT INTO customer
+VALUES
+  (1874,"Chloe","Goodwin",10103,"9208702414","Checked in"),
+  (1915,"Lucian","Henderson",10201,"9285916013","Checked in"),
+  (1415,"Portia","Singleton",10101,"9276676920","Checked out"),
+  (1436,"Kasimir","Mathews",10302,"9079037560","Checked in"),
+  (1363,"Melyssa","Snow",10301,"9428168088","Checked in"),
+  (1644,"Rafael","Weeks",10501,"9923476884","Checked in"),
+  (1183,"Kimberly","Thomas",10403,"9039574569","Checked out"),
+  (1684,"Sonia","Vazquez",10502,"9286026798","Checked in"),
+  (1370,"Kieran","Pratt",10503,"9954153384","Checked in"),
+  (1925,"Shellie","Webb",10603,"9775924382","Checked in");
