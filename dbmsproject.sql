@@ -44,3 +44,13 @@ password_staff INT NOT NULL,
 staff_id INT NOT NULL,
 FOREIGN KEY(staff_id) REFERENCES staff(staff_id));
 
+
+INSERT INTO hotel
+VALUES
+  (101,'Single Non-AC',2100,9),
+  (102,'Single AC',2500,7),
+  (103,'Double Non-AC',3200,8),
+  (104,'Double AC',3700,3),
+  (105,'Deluxe Non-AC',4200,2),
+  (106,'Deluxe AC',4600,4),
+  (107,'Suite',8000,1);
