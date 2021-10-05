@@ -96,3 +96,11 @@ VALUES
   (9983,"Beau Mcpherson",196000,"Front Desk Employee"),
   (9967,"Baxter Rosa",180000,"Room Service Staff"),
   (9908,"Summer Slater",74000,"Hotel Porter");
+
+INSERT INTO password_hotel
+VALUES
+  (9931,"RLL13SNW7R"),
+  (9914,"GJS13BLP7P"),
+  (9983,"HFY54PRM2H"),
+  (9967,"XIR72OPX7D"),
+  (9908,"HOM61HOF2K");
