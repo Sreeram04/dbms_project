@@ -28,7 +28,7 @@ last_name VARCHAR(30) NOT NULL,
 room_no INT NOT NULL,
 phone INT NOT NULL,
 cust_status VARCHAR(30) NOT NULL,
-PRIMARY KEY(sl_no),
+PRIMARY KEY(customer_id),
 FOREIGN KEY(room_no) REFERENCES room(room_no));
 
 CREATE TABLE staff(
