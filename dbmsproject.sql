@@ -88,3 +88,11 @@ VALUES
   (1684,"Sonia","Vazquez",10502,"9286026798","Checked in"),
   (1370,"Kieran","Pratt",10503,"9954153384","Checked in"),
   (1925,"Shellie","Webb",10603,"9775924382","Checked in");
+
+INSERT INTO staff
+VALUES
+  (9931,"Upton Curry",360000,"General Manager"),
+  (9914,"Nelle Foley",186000,"Housekeeping Employee"),
+  (9983,"Beau Mcpherson",196000,"Front Desk Employee"),
+  (9967,"Baxter Rosa",180000,"Room Service Staff"),
+  (9908,"Summer Slater",74000,"Hotel Porter");
