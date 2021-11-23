@@ -1,5 +1,6 @@
 import mysql.connector as msc
 import tkinter as tk
+from tkinter import ttk
 import tkinter.messagebox as tkmsg
 from tkinter import *
 
@@ -78,6 +79,20 @@ def c_show():
 		data=str(i[0])+"       "+i[1]+"       "+i[2]+"       "+str(i[3])+"       "+i[4]+"       "+i[5]
 		List.insert(List.size()+1, data)
 	con.close()
+	
+def c_tree():
+	con=msc.connect(host="localhost",user="root",passwd="Password123#@!",database="HotelDB")
+	curr=con.cursor()
+	curr.execute("select * from customer")
+	rows=curr.fetchall()
+	for item in List.get_children():
+		List.delete(item)
+	#data=("staff id","staff name","salary","Designation")
+	#List.insert("","end",values=data)
+	for i in rows:
+		data=(str(i[0]),str(i[1]),str(i[2]),str(i[3]),str(i[4]),str(i[5]))
+		List.insert("","end",values=data)
+	con.close()
 
 def staff_operations():
 	global staff_op
@@ -133,9 +148,21 @@ def staff_operations():
 	update=tk.Button(staff_op,text="Update Customer Status",command=c_update)
 	update.place(x=20,y=300)
 	global List
-	List=tk.Listbox(staff_op,height=40,width=100)
+	List=ttk.Treeview(staff_op,column=("c1", "c2", "c3","c4","c5","c6"), show='headings', height=15)
+	List.column("# 1", anchor=CENTER,width=100)
+	List.heading("# 1", text="Cust_ID")
+	List.column("# 2", anchor=CENTER,width=100)
+	List.heading("# 2", text="FName")
+	List.column("# 3", anchor=CENTER,width=100)
+	List.heading("# 3", text="LName")
+	List.column("# 4", anchor=CENTER,width=100)
+	List.heading("# 4", text="RoomNo")
+	List.column("# 5", anchor=CENTER,width=100)
+	List.heading("# 5", text="PhoneNo")
+	List.column("# 6", anchor=CENTER,width=100)
+	List.heading("# 6", text="Status")
 	List.place(x=350,y=20)
-	Display=tk.Button(staff_op,text="Display Customer",command=c_show)
+	Display=tk.Button(staff_op,text="Display Customer",command=c_tree)
 	Display.place(x=20,y=350)		
 	staff_exit=tk.Button(staff_op,text="Exit",command=staff_op.destroy)
 	staff_exit.place(x=1120,y=760)
@@ -153,11 +180,16 @@ def login_verify():
 		verify.pack()
 		try_again.pack()
 
+def show_win():
+   win.deiconify()
+   staff_win.destroy()
+
 def staff():
 	global staff_win
 	staff_win=tk.Toplevel(win)
 	staff_win.geometry('600x400')
 	staff_win.resizable(width=False,height=False)
+	win.withdraw()
 	#staff_label=tk.Label(staff_win,text="This is the staff page")
 	global user
 	global pswd
@@ -175,6 +207,8 @@ def staff():
 	pswd_entry.pack()
 	login_button=tk.Button(staff_win,text='Log in',command=login_verify)
 	login_button.pack()
+	staff_back=tk.Button(staff_win, text="Back" ,command= show_win)
+	staff_back.pack()
 	staff_exit=tk.Button(staff_win,text="Exit",command=staff_win.destroy)
 	#staff_label.pack()
 	staff_exit.pack()
