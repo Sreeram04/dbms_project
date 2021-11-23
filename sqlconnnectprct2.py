@@ -66,19 +66,6 @@ def c_update():
 		i_cstat.delete(0,'end')
 		tkmsg.showinfo("Update Status","Updation Successfull")
 		con.close()
-
-def c_show():
-	con=msc.connect(host="localhost",user="root",password="Password123#@!",database="HotelDB")
-	curr=con.cursor()
-	curr.execute("select * from customer ")
-	rows=curr.fetchall()
-	List.delete(0,List.size())
-	data="Cust_ID     FirstName     LastName     RoomNo     PhoneNo     Status"
-	List.insert(List.size()+1, data)
-	for i in rows:
-		data=str(i[0])+"       "+i[1]+"       "+i[2]+"       "+str(i[3])+"       "+i[4]+"       "+i[5]
-		List.insert(List.size()+1, data)
-	con.close()
 	
 def c_tree():
 	con=msc.connect(host="localhost",user="root",passwd="Password123#@!",database="HotelDB")
