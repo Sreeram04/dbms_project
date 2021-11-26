@@ -5,7 +5,7 @@ from tkinter import *
 from tkinter import ttk
 
 import mysql.connector as ms
-mydb =  ms.connect(host="localhost",user="root",passwd="system",database="HotelDB")
+mydb =  ms.connect(host="localhost",user="root",passwd="Password123#@!",database="HotelDB")
 cur = mydb.cursor()
 cur.execute("Select * from password_hotel")
 data=cur.fetchall()
@@ -18,13 +18,33 @@ def customer():
 	cust_win=tk.Toplevel(win)
 	cust_win.geometry('600x400')
 	cust_win.resizable(width=False,height=False)
-	cust_label=tk.Label(cust_win,text="Do customer operations here")
+
+	tree=ttk.Treeview(cust_win,height=10,columns=("c1","c2","c3"))
+	tree.column("#0",width=0,stretch=NO)
+	tree.column("#1",anchor=CENTER,width=80,stretch=NO)
+	tree.heading("#1",text="Room type")
+	tree.column("#2",anchor=CENTER,width=80,stretch=NO)
+	tree.heading("#2",text="Cost")
+	tree.column("#3",anchor=CENTER,width=80)
+	tree.heading("#3",text="Availability")
+	tree.pack()
+
+	con=msc.connect(host="localhost",user="root",passwd="Password123#@!",database="HotelDB")
+	curr=con.cursor()
+	curr.execute("select room_type,cost,room_remaining from hotel")
+	rows=curr.fetchall()
+	for item in tree.get_children():
+		tree.delete(item)
+	for i in rows:
+		data=(str(i[0]),str(i[1]),str(i[2]))
+		tree.insert("","end",values=data)
+	con.close()
+	
 	cust_exit=tk.Button(cust_win,text="Exit",command=cust_win.destroy)
-	cust_label.pack()
 	cust_exit.pack()
 
 def room_view():
-	con=msc.connect(host="localhost",user="root",passwd="system",database="HotelDB")
+	con=msc.connect(host="localhost",user="root",passwd="Password123#@!",database="HotelDB")
 	curr=con.cursor()
 	curr.execute("select * from room where room_status='Available'")
 	rows=curr.fetchall()
@@ -43,7 +63,7 @@ def room_update():
 	if(room_no=="" or room_status==""):
 		tkmsg.showinfo("Update Status","Field is Mandatory")
 	else:
-		con=msc.connect(host="localhost",user="root",password="system",database="HotelDB")
+		con=msc.connect(host="localhost",user="root",password="Password123#@!",database="HotelDB")
 		curr=con.cursor()
 		curr.execute("update room set room_status='"+ room_status +"' where room_no='"+ room_no +"'")
 		curr.execute("commit")
@@ -53,7 +73,7 @@ def room_update():
 		con.close()
 
 def staff_view():
-	con=msc.connect(host="localhost",user="root",passwd="system",database="HotelDB")
+	con=msc.connect(host="localhost",user="root",passwd="Password123#@!",database="HotelDB")
 	curr=con.cursor()
 	curr.execute("select * from staff")
 	rows=curr.fetchall()
@@ -72,7 +92,7 @@ def staff_update():
 	if(staff_id=="" or salary==""):
 		tkmsg.showinfo("Update Status","Field is Mandatory")
 	else:
-		con=msc.connect(host="localhost",user="root",password="system",database="HotelDB")
+		con=msc.connect(host="localhost",user="root",password="Password123#@!",database="HotelDB")
 		curr=con.cursor()
 		curr.execute("update staff set salary='"+ salary +"' where staff_id='"+ staff_id +"'")
 		curr.execute("commit")
@@ -89,7 +109,7 @@ def staff_insert():
 	if(staff_id1=="" or salary1=="" or staff_name1=="" or designation1==""):
 		tkmsg.showinfo("Insertion Status","Field is Mandatory")
 	else:
-		con=msc.connect(host="localhost",user="root",password="system",database="HotelDB")
+		con=msc.connect(host="localhost",user="root",password="Password123#@!",database="HotelDB")
 		curr=con.cursor()
 		curr.execute("insert into staff values('"+staff_id1+"','"+staff_name1+"','"+salary1+"','"+designation1+"')")
 		curr.execute("commit")
@@ -105,7 +125,7 @@ def staff_delete():
 	if(staff_id==""):
 		tkmsg.showinfo("Delete Status","Field is Mandatory")
 	else:
-		con=msc.connect(host="localhost",user="root",password="system",database="HotelDB")
+		con=msc.connect(host="localhost",user="root",password="Password123#@!",database="HotelDB")
 		curr=con.cursor()
 		curr.execute("delete from staff where staff_id='"+staff_id+"'")
 		curr.execute("commit")
@@ -116,7 +136,7 @@ def staff_delete():
 def room():
 	global room_win
 	room_win=tk.Toplevel(staff_op)
-	room_win.geometry('800x500')
+	room_win.geometry('850x550')
 	room_win.resizable(width=False,height=False)
 
 	#Room details
@@ -194,7 +214,7 @@ def c_insert():
 	if (cid=="" or cfname=="" or crno=="" or clname=="" or cphno=="" or cstat==""):
 		tkmsg.showinfo("Insert Status","All Fields are Mandatory")
 	else:
-		con=msc.connect(host="localhost",user="root",password="system",database="HotelDB")
+		con=msc.connect(host="localhost",user="root",password="Password123#@!",database="HotelDB")
 		curr=con.cursor()
 		curr.execute("insert into customer values('"+ cid +"','"+ cfname +"','"+ clname +"','"+ crno +"','"+ cphno +"','"+ cstat +"')")
 		curr.execute("commit")   
@@ -212,7 +232,7 @@ def c_delete():
 	if(cid==""):
 		tkmsg.showinfo("Delete Status","Field is Mandatory")
 	else:
-		con=msc.connect(host="localhost",user="root",password="system",database="HotelDB")
+		con=msc.connect(host="localhost",user="root",password="Password123#@!",database="HotelDB")
 		curr=con.cursor()
 		curr.execute("delete from customer where customer_id='"+ cid +"'")
 		curr.execute("commit")
@@ -226,7 +246,7 @@ def c_update():
 	if (cid=="" or cstat==""):
 		tkmsg.showinfo("Update Status","Fields are Mandatory")
 	else:
-		con=msc.connect(host="localhost",user="root",password="system",database="HotelDB")
+		con=msc.connect(host="localhost",user="root",password="Password123#@!",database="HotelDB")
 		curr=con.cursor()
 		curr.execute("update customer set cust_status='"+ cstat +"' where customer_id='"+ cid +"'")
 		curr.execute("commit")
@@ -236,7 +256,7 @@ def c_update():
 		con.close()
 
 def c_tree():
-	con=msc.connect(host="localhost",user="root",passwd="system",database="HotelDB")
+	con=msc.connect(host="localhost",user="root",passwd="Password123#@!",database="HotelDB")
 	curr=con.cursor()
 	curr.execute("select * from customer")
 	rows=curr.fetchall()
@@ -252,7 +272,7 @@ def customer_det():
 	customer_op=tk.Toplevel(staff_op)
 	customer_op.geometry('1200x800')
 	customer_op.resizable(width=False,height=False)
-	customer_lab=tk.Label(staff_op,text="Customer Details",font=('Helvetica 15 underline'))
+	customer_lab=tk.Label(customer_op,text="Customer Details",font=('Helvetica 15 underline'))
 	customer_lab.place(x=20,y=20)
 
 	global i_cid
@@ -337,6 +357,10 @@ def login_verify():
 	else:
 		tkmsg.showinfo("Error","Incorrext staff id or password")
 
+def show_win():
+   win.deiconify()
+   staff_win.destroy()
+
 def staff():
 	global staff_win
 	staff_win=tk.Toplevel(win)
@@ -359,9 +383,8 @@ def staff():
 	pswd_entry.pack()
 	login_button=tk.Button(staff_win,text='Log in',command=login_verify)
 	login_button.pack()
-	staff_exit=tk.Button(staff_win,text="Exit",command=staff_win.destroy)
-	#staff_label.pack()
-	staff_exit.pack()
+	staff_back=tk.Button(staff_win, text="Back" ,command= show_win)
+	staff_back.pack()
 
 
 win=tk.Tk()
