@@ -14,11 +14,16 @@ for i in data:
 	pswd_dict[str(i[0])]=i[1]
 print(pswd_dict)
 
+def show_win2():
+   win.deiconify()
+   cust_win.destroy()
+
 def customer():
+	global cust_win
 	cust_win=tk.Toplevel(win)
 	cust_win.geometry('600x400')
 	cust_win.resizable(width=False,height=False)
-
+	win.withdraw()
 	tree=ttk.Treeview(cust_win,height=10,columns=("c1","c2","c3"))
 	tree.column("#0",width=0,stretch=NO)
 	tree.column("#1",anchor=CENTER,width=80,stretch=NO)
@@ -40,7 +45,7 @@ def customer():
 		tree.insert("","end",values=data)
 	con.close()
 	
-	cust_exit=tk.Button(cust_win,text="Exit",command=cust_win.destroy)
+	cust_exit=tk.Button(cust_win,text="Exit",command=show_win2)
 	cust_exit.pack()
 
 def room_view():
@@ -133,12 +138,16 @@ def staff_delete():
 		tkmsg.showinfo("Delete Status","Deletion Successfull")
 		con.close()
 
+def show_staff_op2():
+   staff_op.deiconify()
+   room_win.destroy()
+
 def room():
 	global room_win
 	room_win=tk.Toplevel(staff_op)
 	room_win.geometry('850x550')
 	room_win.resizable(width=False,height=False)
-
+	staff_op.withdraw()
 	#Room details
 	global i_room_no
 	global i_room_status
@@ -192,7 +201,7 @@ def room():
 	staffdelete=tk.Button(room_win,text='delete staff',command=staff_delete)
 	staffdelete.place(x=20,y=350)
 
-	staff_exit=tk.Button(room_win,text="Exit",command=room_win.destroy)
+	staff_exit=tk.Button(room_win,text="Exit",command=show_staff_op2)
 	staff_exit.pack()
 
 	global List
@@ -267,6 +276,10 @@ def c_tree():
 		List1.insert("","end",values=data)
 	con.close()
 
+def show_staff_op1():
+   staff_op.deiconify()
+   customer_op.destroy()
+
 def customer_det():
 	global customer_op
 	customer_op=tk.Toplevel(staff_op)
@@ -274,7 +287,7 @@ def customer_det():
 	customer_op.resizable(width=False,height=False)
 	customer_lab=tk.Label(customer_op,text="Customer Details",font=('Helvetica 15 underline'))
 	customer_lab.place(x=20,y=20)
-
+	staff_op.withdraw()
 	global i_cid
 	global i_cfname
 	global i_clname
@@ -329,9 +342,12 @@ def customer_det():
 	List1.place(x=350,y=20)
 	Display=tk.Button(customer_op,text="Display Customer",command=c_tree)
 	Display.place(x=20,y=350)		
-	staff_exit=tk.Button(customer_op,text="Exit",command=customer_op.destroy)
-	staff_exit.place(x=1120,y=760)
+	cust_exit=tk.Button(customer_op,text="Exit",command=show_staff_op1)
+	cust_exit.place(x=1020,y=700)
 
+def show_staff_win():
+   staff_win.deiconify()
+   staff_op.destroy()
 
 def staff_operations():
 	global staff_op
@@ -340,11 +356,12 @@ def staff_operations():
 	staff_op.resizable(width=False,height=False)
 	staff_oper=tk.Label(staff_op,text="Do staff operations here")
 	staff_oper.pack()
+	staff_win.withdraw()
 	room_button=tk.Button(staff_op,text="Hotel details",command=room)
 	room_button.pack()
 	customer_button=tk.Button(staff_op,text="Customer details",command=customer_det)
 	customer_button.pack()
-	staff_exit=tk.Button(staff_op,text="Exit",command=staff_op.destroy)
+	staff_exit=tk.Button(staff_op,text="back",command=show_staff_win)
 	staff_exit.pack()
 
 def login_verify():
@@ -366,6 +383,7 @@ def staff():
 	staff_win=tk.Toplevel(win)
 	staff_win.geometry('600x400')
 	staff_win.resizable(width=False,height=False)
+	win.withdraw()
 	#staff_label=tk.Label(staff_win,text="This is the staff page")
 	global user
 	global pswd
@@ -383,7 +401,7 @@ def staff():
 	pswd_entry.pack()
 	login_button=tk.Button(staff_win,text='Log in',command=login_verify)
 	login_button.pack()
-	staff_back=tk.Button(staff_win, text="Back" ,command= show_win)
+	staff_back=tk.Button(staff_win, text="Back" ,command=show_win)
 	staff_back.pack()
 
 
