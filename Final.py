@@ -3,7 +3,6 @@ import tkinter as tk
 import tkinter.messagebox as tkmsg
 from tkinter import *
 from tkinter import ttk
-
 import mysql.connector as ms
 mydb =  ms.connect(host="localhost",user="root",passwd="Password123#@!",database="HotelDB")
 cur = mydb.cursor()
@@ -20,19 +19,19 @@ def show_win2():
 def customer():
 	global cust_win
 	cust_win=tk.Toplevel(win)
+	cust_win.title("Customer Menu")
 	cust_win.geometry('600x400')
 	cust_win.resizable(width=False,height=False)
 	win.withdraw()
 	tree=ttk.Treeview(cust_win,height=10,columns=("c1","c2","c3"))
 	tree.column("#0",width=0,stretch=NO)
-	tree.column("#1",anchor=CENTER,width=80,stretch=NO)
+	tree.column("#1",anchor=CENTER,width=140,stretch=NO)
 	tree.heading("#1",text="Room type")
-	tree.column("#2",anchor=CENTER,width=80,stretch=NO)
+	tree.column("#2",anchor=CENTER,width=100,stretch=NO)
 	tree.heading("#2",text="Cost")
-	tree.column("#3",anchor=CENTER,width=80)
+	tree.column("#3",anchor=CENTER,width=100)
 	tree.heading("#3",text="Availability")
 	tree.pack()
-
 	con=msc.connect(host="localhost",user="root",passwd="Password123#@!",database="HotelDB")
 	curr=con.cursor()
 	curr.execute("select room_type,cost,room_remaining from hotel")
@@ -54,7 +53,7 @@ def room_view():
 	rows=curr.fetchall()
 	for item in List.get_children():
 		List.delete(item)
-	data=("room_no","room_id","room_status")
+	data=("Room No","Room ID","Room Status")
 	List.insert("","end",values=data)
 	for i in rows:
 		data=(str(i[0]),str(i[1]),str(i[2]))
@@ -83,7 +82,7 @@ def staff_view():
 	rows=curr.fetchall()
 	for item in List.get_children():
 		List.delete(item)
-	data=("staff id","staff name","salary","Designation")
+	data=("Staff ID","Staff Name","Salary","Designation")
 	List.insert("","end",values=data)
 	for i in rows:
 		data=(str(i[0]),str(i[1]),str(i[2]),str(i[3]))
@@ -144,6 +143,7 @@ def show_staff_op2():
 def room():
 	global room_win
 	room_win=tk.Toplevel(staff_op)
+	room_win.title("Room Details")
 	room_win.geometry('850x550')
 	room_win.resizable(width=False,height=False)
 	staff_op.withdraw()
@@ -160,7 +160,6 @@ def room():
 	t_room_status.place(x=20,y=60)
 	i_room_status=tk.Entry(room_win,textvariable=room_status)
 	i_room_status.place(x=150,y=60)
-
 	#staff details
 	global i_staff_id
 	global i_staff_name
@@ -186,31 +185,28 @@ def room():
 	t_designation.place(x=20,y=290)
 	i_designation=tk.Entry(room_win,textvariable=designation)
 	i_designation.place(x=150,y=290)
-
-	roomview=tk.Button(room_win,text='room details',command=room_view)
+	roomview=tk.Button(room_win,text='Room Details',command=room_view)
 	roomview.place(x=20,y=140)
-	roomupdate=tk.Button(room_win,text='room update',comman=room_update)
-	roomupdate.place(x=120,y=140)
-	staffview=tk.Button(room_win,text='staff details',command=staff_view)
+	roomupdate=tk.Button(room_win,text='Room Update',comman=room_update)
+	roomupdate.place(x=150,y=140)
+	staffview=tk.Button(room_win,text='Staff Details',command=staff_view)
 	staffview.place(x=20,y=320)
-	staffupdate=tk.Button(room_win,text='staff salary update',command=staff_update)
-	staffupdate.place(x=120,y=320)
-	staffinsert=tk.Button(room_win,text='insert staff',command=staff_insert)
-	staffinsert.place(x=260,y=320)
-	staffdelete=tk.Button(room_win,text='delete staff',command=staff_delete)
-	staffdelete.place(x=20,y=350)
-
+	staffupdate=tk.Button(room_win,text='Staff Salary Update',command=staff_update)
+	staffupdate.place(x=150,y=320)
+	staffinsert=tk.Button(room_win,text='Insert Staff',command=staff_insert)
+	staffinsert.place(x=20,y=360)
+	staffdelete=tk.Button(room_win,text='Delete Staff',command=staff_delete)
+	staffdelete.place(x=150,y=360)
 	staff_exit=tk.Button(room_win,text="Exit",command=show_staff_op2)
 	staff_exit.pack()
-
 	global List
 	List=ttk.Treeview(room_win,height=10,columns=("c1","c2","c3","c4"))
 	List.column("#0",width=0,stretch=NO)
-	List.column("#1",anchor=CENTER,width=80,stretch=NO)
-	List.column("#2",anchor=CENTER,width=80,stretch=NO)
-	List.column("#3",anchor=CENTER,width=80,stretch=NO)
-	List.column("#4",anchor=CENTER,width=80)
-	List.place(x=380,y=30)
+	List.column("#1",anchor=CENTER,width=100,stretch=NO)
+	List.column("#2",anchor=CENTER,width=100,stretch=NO)
+	List.column("#3",anchor=CENTER,width=100,stretch=NO)
+	List.column("#4",anchor=CENTER,width=180)
+	List.place(x=360,y=30)
 
 def c_insert():
 	cid=i_cid.get()
@@ -282,6 +278,7 @@ def show_staff_op1():
 def customer_det():
 	global customer_op
 	customer_op=tk.Toplevel(staff_op)
+	customer_op.title("Customer Details")
 	customer_op.geometry('1200x800')
 	customer_op.resizable(width=False,height=False)
 	customer_lab=tk.Label(customer_op,text="Customer Details",font=('Helvetica 15 underline'))
@@ -293,7 +290,6 @@ def customer_det():
 	global i_crno
 	global i_cphno
 	global i_cstat
-
 	cid=tk.Label(customer_op,text='Customer ID',font=("bold",10))
 	cid.place(x=20,y=50)
 	i_cid=tk.Entry(customer_op)
@@ -351,16 +347,15 @@ def show_staff_win():
 def staff_operations():
 	global staff_op
 	staff_op=tk.Toplevel(staff_win)
+	staff_op.title("Staff Menu")
 	staff_op.geometry('600x400')
 	staff_op.resizable(width=False,height=False)
-	staff_oper=tk.Label(staff_op,text="Do staff operations here")
-	staff_oper.pack()
 	staff_win.withdraw()
 	room_button=tk.Button(staff_op,text="Hotel details",command=room)
 	room_button.pack()
 	customer_button=tk.Button(staff_op,text="Customer details",command=customer_det)
 	customer_button.pack()
-	staff_exit=tk.Button(staff_op,text="back",command=show_staff_win)
+	staff_exit=tk.Button(staff_op,text="Back",command=show_staff_win)
 	staff_exit.pack()
 
 def login_verify():
@@ -371,7 +366,7 @@ def login_verify():
 	if user1 in pswd_dict and pswd1==pswd_dict[user1]:
 		staff_operations()
 	else:
-		tkmsg.showinfo("Error","Incorrext staff id or password")
+		tkmsg.showinfo("Error","Incorrect staff id or password")
 
 def show_win():
    win.deiconify()
@@ -380,10 +375,10 @@ def show_win():
 def staff():
 	global staff_win
 	staff_win=tk.Toplevel(win)
+	staff_win.title("Staff Login")
 	staff_win.geometry('600x400')
 	staff_win.resizable(width=False,height=False)
 	win.withdraw()
-	#staff_label=tk.Label(staff_win,text="This is the staff page")
 	global user
 	global pswd
 	global user_entry
@@ -405,6 +400,7 @@ def staff():
 
 
 win=tk.Tk()
+win.title("Main Menu")
 win.geometry('600x400')
 win.resizable(width=False,height=False)
 cust_button=tk.Button(win,text="Customer - Click here",command=customer)
