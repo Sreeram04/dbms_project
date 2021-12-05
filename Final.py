@@ -12,7 +12,6 @@ data=cur.fetchall()
 pswd_dict={}
 for i in data:
 	pswd_dict[str(i[0])]=i[1]
-print(pswd_dict)
 
 def show_win2():
    win.deiconify()
