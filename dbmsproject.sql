@@ -99,5 +99,5 @@ VALUES
 
 INSERT INTO password_hotel
 VALUES
-  (9931,"RLL13SNW7R"),
-  (9983,"HFY54PRM2H");
+  (9931,"RLL13"),
+  (9983,"HFY54");
