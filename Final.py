@@ -143,7 +143,7 @@ def show_staff_op2():
 def room():
 	global room_win
 	room_win=tk.Toplevel(staff_op)
-	room_win.title("Hotel Details")
+	room_win.title("Room Details")
 	room_win.geometry('850x550')
 	room_win.resizable(width=False,height=False)
 	staff_op.withdraw()
@@ -279,7 +279,7 @@ def customer_det():
 	global customer_op
 	customer_op=tk.Toplevel(staff_op)
 	customer_op.title("Customer Details")
-	customer_op.geometry('1200x800')
+	customer_op.geometry('1000x550')
 	customer_op.resizable(width=False,height=False)
 	customer_lab=tk.Label(customer_op,text="Customer Details",font=('Helvetica 15 underline'))
 	customer_lab.place(x=20,y=20)
@@ -338,7 +338,7 @@ def customer_det():
 	Display=tk.Button(customer_op,text="Display Customer",command=c_tree)
 	Display.place(x=20,y=350)		
 	cust_exit=tk.Button(customer_op,text="Exit",command=show_staff_op1)
-	cust_exit.place(x=1020,y=700)
+	cust_exit.place(x=820,y=450)
 
 def show_staff_win():
    staff_win.deiconify()
