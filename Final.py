@@ -143,7 +143,7 @@ def show_staff_op2():
 def room():
 	global room_win
 	room_win=tk.Toplevel(staff_op)
-	room_win.title("Room Details")
+	room_win.title("Hotel Details")
 	room_win.geometry('850x550')
 	room_win.resizable(width=False,height=False)
 	staff_op.withdraw()
